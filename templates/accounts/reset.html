@@ -1,0 +1,27 @@
+{%extends 'base.html' %}
+
+{%load static%}
+
+{%block content%}
+
+{%if validlink%}
+    <p>please enter and confirm your new password</p>
+    <form method="post">
+        {%csrf_token%}
+
+        <div>
+            <label for="password1">New Password: </label>
+            <small>{{form.new_password.errors}}</small>
+            <p>{{form.new_password1}}</p>
+        </div>
+        <div>
+            <label for="password2">Confirm New Password: </label>
+            <small>{{form.confirm_password.errors}}</small>
+            <p>{{form.new_password2}}</p>
+        </div>
+        <button type="submit">Change Password</button>
+    </form>
+    {%else%}
+        <h3>Invalid Link! or has been used.</h3>
+    {%endif%}
+{%endblock content%}

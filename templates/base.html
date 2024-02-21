@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Website</title>
+</head>
+<body>
+    <header>
+        <ul>
+            {%if request.user.is_authenticated%}
+            <li><a href="{%url 'home' %}">Home</a></li>
+            <li><a href="{%url 'logout-confirm' %}">LogOut</a></li>
+            <h3>welcome {{request.user.username}},</h3>
+            {%else%}
+            <li><a href="{%url 'home' %}">Home</a></li>
+            <li><a href="{%url 'user-signup' %}">SignUp</a></li>
+            <li><a href="{%url 'user-login' %}">LogIn</a></li>
+            {%endif%}
+        </ul>
+    </header>
+    <div>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+            
+    </div>
+
+    <div>
+        {%block content%}
+
+        {%endblock content%}
+    </div>
+</body>
+</html>

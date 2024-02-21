@@ -1,0 +1,35 @@
+{%extends 'base.html' %}
+
+{%load static%}
+
+{%block content%}
+
+<div>
+    {% if form.errors%}
+    <p>login credentials is incorrect</p>
+    {%endif%}
+    {%if next %}
+        {% if user.is_authenticated%}
+            <p>you do not access to visit this page , please login first.</p>
+        {% else %}
+            <p>please login to access this page</p>
+        {%endif%}
+    {%endif%}
+    <form action="" method="post">
+        {%csrf_token%}
+
+        <div>
+            <label for="">{{form.username.label_tag}}</label>
+            <p>{{form.username}}</p>
+        </div>
+        <div>
+            <label for="">{{form.password.label_tag}}</label>
+            <p>{{form.password}}</p>
+        </div>
+        <input type="submit" value="login">
+        <input type="hidden" name="next" value="{{next}}">
+    </form>
+    <p><a href="{%url 'reset-password' %}">Forgot password?</a></p>
+</div>
+
+{%endblock content%}

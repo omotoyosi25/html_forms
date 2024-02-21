@@ -1,0 +1,99 @@
+{%extends 'base.html' %}
+
+{%load static%}
+
+{%block content%}
+    <div>
+        <h2>Student registration form</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            <p style="color:red;">{{forms.non_field_errors}}</p>
+            {%for field in forms %}
+                <div>
+                    <small style="color:red;">{{field.errors}}</small>
+                    <label for="">{{field.label_tag}}</label>
+                    {{field}}
+                </div><br>
+            {%endfor%}    
+
+            <input type="submit" value="submit">
+        </form>
+    </div>
+    
+    <div>
+        {% if students %}
+        {%for data in students%}
+            <ul>
+                <li>{{data.name}}</li>
+                <li>{{data.email}}</li>
+                <li>{{data.birth_date}}</li>
+                <li>{{data.address}}</li>
+                <li>{{data.gender}}</li>
+                <a href="{%url 'delete_post' data.id %}">delete</a>
+                <a href="{%url 'edit_post' data.id %}">edit post</a>
+            </ul>
+            {%endfor%}
+            {%else%}
+            <p>No students record yet</p>
+            {%endif%}
+        </div>
+{%endblock content%}
+    <!-- way 2 to display forms
+                <div>
+                    {{forms.full_name.errors}}
+                    <label for="">{{forms.full_name.label_tag}}</label>
+                    {{forms.full_name}}
+                </div><br>
+    
+                <div>
+                    {{forms.email.errors}}
+                    <label for="">{{forms.email.label_tag}}</label>
+                    {{forms.email}}
+                </div><br>
+    
+                <div>
+                    {{forms.birth_date.errors}}
+                    <label for="">{{forms.birth_date.label_tag}}</label>
+                    {{forms.birth_date}}
+                </div><br>
+    
+                <div>
+                    {{forms.address.errors}}
+                    <label for="">{{forms.address.label_tag}}</label>
+                    {{forms.address}}
+                </div><br>
+    
+                <div>
+                    {{forms.gender.errors}}
+                    <label for="">{{forms.gender.label_tag}}</label>
+                    {{forms.gender}}
+                </div><br> -->
+    <!-- {{forms.as_p}} -->
+    <!-- way 1 to display forms -->
+                <!-- <div>
+                    <label for="full_name">Full Names:</label>
+                    <input type="text" id="name" placeholder="enter your full_name" name="full_name">
+                </div><br>
+            
+                <div>
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="name" placeholder="enter your email address" name="email">
+                </div><br>
+            
+                <div>
+                    <label for="date_of_birth">Date of Birth:</label>
+                    <input type="date" id="name" placeholder="date of birth" name="birth_date">
+                </div><br>
+            
+                <div>
+                    <label for="address">Address:</label>
+                    <input type="text" id="name" placeholder="enter your address" name="address">
+                </div><br>
+            
+                <div>
+                    <label for="gender">Gender:</label> 
+                    <select name="gender" id="gender">
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                    </select>
+                </div><br> -->
